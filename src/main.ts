@@ -11,8 +11,8 @@ const renderCurrentWeather = (data: any) => {
   });
 
   const banner = (data.dt > data.sys.sunrise && data.dt < data.sys.sunset)
-		? "assets/images/day.svg"
-		: "assets/images/night.svg";
+		? "src/assets/imgs/day.svg"
+		: "src/assets/imgs/night.svg";
   
   forecastEl.innerHTML = `
 		<img src="${banner}" class="card-img-top">
@@ -74,7 +74,6 @@ document.querySelector<HTMLFormElement>("#search-form")!.addEventListener("submi
 		} else {
 			alert(`Error: ${message}`);
 		}
-	} finally {
+	} 
 		if (spinnerEl) spinnerEl.classList.add('hide');
-	}
 });
