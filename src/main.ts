@@ -1,4 +1,4 @@
-import "./assets/style.scss";
+import "./assets/scss/style.scss";
 import { fetchWeather } from './services/OWMAPI';
 const forecastEl = document.querySelector<HTMLDivElement>("#forecast")!;
 const spinnerEl = document.querySelector<HTMLDivElement>("#spinner");
@@ -56,13 +56,13 @@ document.querySelector<HTMLFormElement>("#search-form")!.addEventListener("submi
 		alertEl.textContent = '';
 	}
 
-	if (spinnerEl) spinnerEl.classList.remove('hide');
+	if (spinnerEl) spinnerEl.classList.remove('d-none');
 
 	try {
 		const currentWeather = await fetchWeather(city);
 
 		renderCurrentWeather(currentWeather);
-		forecastEl.classList.remove("hide");
+		forecastEl.classList.remove("d-none");
 	} catch (err: any) {
 		console.error('fetchWeather error:', err);
 
@@ -75,5 +75,5 @@ document.querySelector<HTMLFormElement>("#search-form")!.addEventListener("submi
 			alert(`Error: ${message}`);
 		}
 	} 
-		if (spinnerEl) spinnerEl.classList.add('hide');
+		if (spinnerEl) spinnerEl.classList.add('d-none');
 });
