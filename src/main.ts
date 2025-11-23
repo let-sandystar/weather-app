@@ -3,6 +3,7 @@ import { fetchWeather } from './services/OWMAPI';
 const forecastEl = document.querySelector<HTMLDivElement>("#forecast")!;
 const spinnerEl = document.querySelector<HTMLDivElement>("#spinner");
 const alertEl = document.querySelector<HTMLDivElement>("#alert");
+const background = document.querySelector<HTMLBodyElement>("body");
 
 
 const renderCurrentWeather = (data: any) => {
@@ -10,12 +11,10 @@ const renderCurrentWeather = (data: any) => {
     return `<li><img src="https://openweathermap.org/img/wn/${condition.icon}@2x.png" alt="${condition.main}" title="${condition.description}"></li>`;
   });
 
-  const banner = (data.dt > data.sys.sunrise && data.dt < data.sys.sunset)
-		? "src/assets/imgs/day.svg"
-		: "src/assets/imgs/night.svg";
-  
+  const isDay = data.dt > data.sys.sunrise && data.dt < data.sys.sunset
+		background!.className = isDay ? "day" : "night"
+
   forecastEl.innerHTML = `
-		<img src="${banner}" class="card-img-top">
 		<div class="card-body text-center">
       <ul class="conditions list-unstyled text-center">
         ${weatherConditions.join("")}

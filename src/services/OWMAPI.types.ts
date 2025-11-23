@@ -13,4 +13,11 @@ export interface weatherTypes {
     wind: {
         speed: Number;
     }
+    dt: Number,
+    sys: {
+      id: Number;
+      country: String;
+      sunrise: Number;
+      sunset: Number;
+}
 }
