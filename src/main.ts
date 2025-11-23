@@ -16,7 +16,10 @@ const renderCurrentWeather = (data: any) => {
   
   forecastEl.innerHTML = `
 		<img src="${banner}" class="card-img-top">
-		<div class="card-body">
+		<div class="card-body text-center">
+      <ul class="conditions list-unstyled text-center">
+        ${weatherConditions.join("")}
+      </ul>
 			<h5 class="card-title" id="location">
 				<span id="city">${data.name}</span>,
 				<span id="country">${data.sys.country}</span>
@@ -25,6 +28,10 @@ const renderCurrentWeather = (data: any) => {
 				<span id="temperature">${data.main.temp}</span>
 				&deg;C
 			</p>
+      <p class="feelslike">
+        <span id="feels_like">${data.main.feels_like}</span>
+        &deg;C
+      </p>
 			<p class="humidity">
 				<span id="humidity">${data.main.humidity}</span>
 				&percnt; humidity
@@ -34,10 +41,6 @@ const renderCurrentWeather = (data: any) => {
 				m/s
 			</p>
 		</div>
-
-		<ul class="conditions">
-			${weatherConditions.join("")}
-		</ul>
 	`;
 };
 
@@ -52,7 +55,7 @@ document.querySelector<HTMLFormElement>("#search-form")!.addEventListener("submi
 	}
 
 	if (alertEl) {
-		alertEl.classList.add('hide');
+		alertEl.classList.add('d-none');
 		alertEl.textContent = '';
 	}
 
@@ -69,8 +72,8 @@ document.querySelector<HTMLFormElement>("#search-form")!.addEventListener("submi
 		const message = err?.message ?? String(err) ?? "Couldn't get weather";
 
 		if (alertEl) {
-			alertEl.textContent = `Error: ${message}`;
-			alertEl.classList.remove('hide');
+			alertEl.textContent = `Error: ${message} not found`;
+			alertEl.classList.remove('d-none');
 		} else {
 			alert(`Error: ${message}`);
 		}

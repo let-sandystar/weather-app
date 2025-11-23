@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +27,7 @@
 					<img src="src/assets/imgs/loading.gif" class="img-fluid">
 				</div>
 
-				<div id="alert" class="hide" role="alert"></div>
+				<div id="alert" class="d-none" role="alert"></div>
 
 				<div id="forecast" class="card text-black mt-2 d-none">
 					<img src="/src/assets/imgs/forecast-banner.png" class="card-img-top">
@@ -38,6 +38,10 @@
 						</h5>
 						<p class="temp">
 							<span id="temperature">42.0</span>
+							&deg;C
+						</p>
+            <p class="feelslike">
+							<span id="feels_like">42.0</span>
 							&deg;C
 						</p>
 						<p class="humidity">
