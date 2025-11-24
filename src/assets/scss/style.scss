@@ -2,7 +2,6 @@ $success: pink;
 /* lägga in sass-overrides ovanför importen */
 @import "bootstrap/scss/bootstrap";
 
-
 .card-img-top {
     width: 100%;
     max-height: 500px;
@@ -10,39 +9,36 @@ $success: pink;
 }
 
 body {
-    background: #EEAECA;
-    background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+    background: #5e2b80;
+    background: linear-gradient(90deg, rgba(94, 43, 128, 1) 17%, rgba(45, 22, 64, 1) 100%);
+    transition: background 30s ease-in;
 }
 
 body.night {
-    background-image: url("/src/assets/imgs/night-pattern.jpg");
-    background-size: auto;
-    background-repeat: repeat;
+    background: #020024;
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 26%, rgb(16, 16, 91) 100%);
 }
 
 body.day {
-    background-image: url("/src/assets/imgs/day-pattern.jpg");
-    background-size: auto;
-    background-repeat: repeat;
+    background: #ffffff;
+    background: radial-gradient(circle, rgb(201, 220, 236) 0%, rgba(104, 131, 179, 1) 100%);
 }
 
 
 #forecast {
-    /* background-color: #5e2292;
-    border-radius: 1rem;
-
-    border: transparent 1px solid;
-    background: radial-gradient(
-        circle at 50% 100%, 
-        #652c97, 
-        #42116e),
-        padding-box, 
-        linear-gradient(#3f0b6e, #8242ba) border-box;  */
-
     background: rgba(255, 255, 255, 0.42);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(9.7px);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(9.7px);
+    border: 1px solid rgba(255, 255, 255, 0.48);
+}
+
+#query {
+    background: rgba(255, 255, 255, 0.42);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(9.7px);
     border: 1px solid rgba(255, 255, 255, 0.48);
 }

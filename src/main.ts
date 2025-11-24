@@ -4,6 +4,7 @@ const forecastEl = document.querySelector<HTMLDivElement>("#forecast")!;
 const spinnerEl = document.querySelector<HTMLDivElement>("#spinner");
 const alertEl = document.querySelector<HTMLDivElement>("#alert");
 const background = document.querySelector<HTMLBodyElement>("body");
+const inputCity = document.querySelector<HTMLInputElement>("#query");
 
 
 const renderCurrentWeather = (data: any) => {
@@ -28,7 +29,7 @@ const renderCurrentWeather = (data: any) => {
 				&deg;C
 			</p>
       <p class="feelslike">
-        <span id="feels_like">${data.main.feels_like}</span>
+        <span id="feels_like">Feels like: ${data.main.feels_like}</span>
         &deg;C
       </p>
 			<p class="humidity">
@@ -46,7 +47,7 @@ const renderCurrentWeather = (data: any) => {
 document.querySelector<HTMLFormElement>("#search-form")!.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-	const city = document.querySelector<HTMLInputElement>("#query")?.value.trim();
+	const city = inputCity!.value.trim();
 
 	if (!city) {
 		alert('Please enter a city name');

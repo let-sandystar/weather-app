@@ -15,27 +15,27 @@
 
 				<div id="search-wrapper">
 					<form id="search-form">
-						<div class="input-group mt-3">
-							<input type="text" id="query" class="form-control" placeholder="Enter a city" aria-label="City" aria-details="Search for city to show current weather for." minlength="3" required>
-							<button type="submit" class="btn btn-success">🔍</button>
+						<div class="input-group mt-5">
+							<input type="text" id="query" class="form-control" placeholder="🔍 Enter a city" aria-label="City" aria-details="Search for city to show current weather for." minlength="3" required>
+							<!-- <button type="submit" class="btn btn-success">🔍</button> -->
 						</div>
 					</form>
 				</div>
 
-				<div id="spinner" class="d-none" role="status">
+				<div id="spinner" class="d-none mt-3" role="status">
 					<span class="visually-hidden">Loading...</span>
-					<img src="src/assets/imgs/loading.gif" class="img-fluid">
+					<img src="src/assets/imgs/loadingcircle.gif" class="img-fluid">
 				</div>
 
 				<div id="alert" class="d-none" role="alert"></div>
 
-				<div id="forecast" class="card text-black mt-2 d-none">
-					<img src="/src/assets/imgs/forecast-banner.png" class="card-img-top">
+				<div id="forecast" class="card text-black mt-4 d-none">
+					<!-- <img src="/src/assets/imgs/forecast-banner.png" class="card-img-top"> -->
 					<div class="card-body">
-						<h5 class="card-title" id="location">
+						<h1 class="card-title" id="location">
 							<span id="city">City</span>,
 							<span id="country">Country</span>
-						</h5>
+						</h1>
 						<p class="temp">
 							<span id="temperature">42.0</span>
 							&deg;C
