@@ -82,7 +82,7 @@ document.querySelector<HTMLFormElement>("#search-form")!.addEventListener("submi
 		if (spinnerEl) spinnerEl.classList.add('d-none');
 });
 
-window.addEventListener("DOMContentLoaded", async async => {
+window.addEventListener("DOMContentLoaded", async () => {
 	const savedCity = localStorage.getItem("lastCity");
 	if(savedCity) {
 		try {
