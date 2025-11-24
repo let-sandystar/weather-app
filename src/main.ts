@@ -66,6 +66,7 @@ document.querySelector<HTMLFormElement>("#search-form")!.addEventListener("submi
 
 		renderCurrentWeather(currentWeather);
 		forecastEl.classList.remove("d-none");
+		localStorage.setItem("lastCity", city);
 	} catch (err: any) {
 		console.error('fetchWeather error:', err);
 
@@ -79,4 +80,18 @@ document.querySelector<HTMLFormElement>("#search-form")!.addEventListener("submi
 		}
 	} 
 		if (spinnerEl) spinnerEl.classList.add('d-none');
+});
+
+window.addEventListener("DOMContentLoaded", async async => {
+	const savedCity = localStorage.getItem("lastCity");
+	if(savedCity) {
+		try {
+			const currentWeather = await fetchWeather(savedCity);
+      		renderCurrentWeather(currentWeather);
+			forecastEl.classList.remove("d-none");
+			inputCity!.value = savedCity;
+		} catch (error) {
+			console.error("Couldn't fetch saved city");
+		}
+	}
 });
