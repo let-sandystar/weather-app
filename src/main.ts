@@ -1,5 +1,6 @@
 import "./assets/scss/style.scss";
 import { fetchWeather } from './services/OWMAPI';
+import type { weatherTypes } from "./services/OWMAPI.types";
 const forecastEl = document.querySelector<HTMLDivElement>("#forecast")!;
 const spinnerEl = document.querySelector<HTMLDivElement>("#spinner");
 const alertEl = document.querySelector<HTMLDivElement>("#alert");
@@ -7,13 +8,13 @@ const background = document.querySelector<HTMLBodyElement>("body");
 const inputCity = document.querySelector<HTMLInputElement>("#query");
 
 
-const renderCurrentWeather = (data: any) => {
+const renderCurrentWeather = (data: weatherTypes) => {
   const weatherConditions = data.weather.map((condition: any) => {
     return `<li><img src="https://openweathermap.org/img/wn/${condition.icon}@2x.png" alt="${condition.main}" title="${condition.description}"></li>`;
   });
 
-  const isDay = data.dt > data.sys.sunrise && data.dt < data.sys.sunset
-		background!.className = isDay ? "day" : "night"
+/*   const isDay = data.dt > data.sys.sunrise && data.dt < data.sys.sunset
+		background!.className = isDay ? "day" : "night" */
 
   forecastEl.innerHTML = `
 		<div class="card-body text-center">
@@ -48,6 +49,7 @@ document.querySelector<HTMLFormElement>("#search-form")!.addEventListener("submi
   e.preventDefault();
 
 	const city = inputCity!.value.trim();
+	// const target = e.target as HTMLFormElement; const city = target.value.trim();
 
 	if (!city) {
 		alert('Please enter a city name');
@@ -68,6 +70,8 @@ document.querySelector<HTMLFormElement>("#search-form")!.addEventListener("submi
 		forecastEl.classList.remove("d-none");
 		localStorage.setItem("lastCity", city);
 	} catch (err: any) {
+		//if(err instanceof Error){}
+		
 		console.error('fetchWeather error:', err);
 
 		const message = err?.message ?? String(err) ?? "Couldn't get weather";

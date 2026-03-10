@@ -3,21 +3,23 @@ export interface weatherTypes {
     main: {
         temp: Number;
         feels_like: Number;
-        Humidity: Number;
+        humidity: Number;
     }
-    weather: [
+    weather: 
         {
             main: String;
-        }
-    ]
+            description: String;
+            id: Number;
+            icon: String;
+        }[];
     wind: {
         speed: Number;
-    }
-    dt: Number,
+    };
+    dt: Number;
     sys: {
       id: Number;
       country: String;
       sunrise: Number;
       sunset: Number;
-}
+    }
 }

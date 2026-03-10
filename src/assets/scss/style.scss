@@ -11,10 +11,10 @@ $success: pink;
 body {
     background: #5e2b80;
     background: linear-gradient(90deg, rgba(94, 43, 128, 1) 17%, rgba(45, 22, 64, 1) 100%);
-    transition: background 30s ease-in;
+    /* transition: background 30s ease-in; */
 }
 
-body.night {
+/* body.night {
     background: #020024;
     background: linear-gradient(90deg, rgba(2, 0, 36, 1) 26%, rgb(16, 16, 91) 100%);
 }
@@ -23,7 +23,7 @@ body.day {
     background: #ffffff;
     background: radial-gradient(circle, rgb(201, 220, 236) 0%, rgba(104, 131, 179, 1) 100%);
 }
-
+ */
 
 #forecast {
     background: rgba(255, 255, 255, 0.42);

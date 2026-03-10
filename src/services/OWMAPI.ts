@@ -1,6 +1,6 @@
 /* import { weatherTypes } from "./OWMAPI.types"; */
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
-const API_KEY = import.meta.env.VITE_WEATHER_API_KEY ?? import.meta.env.WEATHER_API_KEY;
+const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
 export const fetchWeather = async (city: string ) /* Promise<weatherTypes> */ => {
     if (!city) throw new Error("City is required");
