@@ -6,12 +6,13 @@ export const fetchCitySuggestions = async (query: string ) => {
     if (!query) return [];
 
     const url = `${BASE_URL}?namePrefix=${query}`;
+    console.log("url", url);
 
     const options = {
         method: "GET",
         headers: {
-            'x-rapidapi-key': API_KEY,
-            'x-rapidapi-host': HOST,
+            'X-RapidAPI-Key': API_KEY,
+            'X-RapidAPI-Host': HOST,
         },
     };
 
