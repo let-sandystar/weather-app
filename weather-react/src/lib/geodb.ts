@@ -20,7 +20,12 @@ export const fetchCitySuggestions = async (query: string ) => {
         const res = await fetch(url, options);
         const data = await res.json();
 
-        return data.data.map((city: any) => city.city);
+        if (res.status === 429) {
+            console.warn("Rate limited - returning empty list");
+            return [];
+        }
+
+        return data.data?.map((city: any) => city.city) ?? [];
     } catch (err) {
         console.error("geodb fetch failed:", err);
         return [];
