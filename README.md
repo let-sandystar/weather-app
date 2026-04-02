@@ -16,7 +16,7 @@ I am now using this project as a learning playground for React, gradually refact
 - Fetch-based API integration
 ### Current refactor
 - React
-- TypeScript
+- Vite
 - Tailwind CSS
 - Component extraction and UI/UX improvements
 
