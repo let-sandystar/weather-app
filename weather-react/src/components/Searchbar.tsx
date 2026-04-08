@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchCitySuggestions } from "../lib/geodb";
 import SuggestionList from "./SuggestionList";
 
@@ -9,9 +9,15 @@ type SearchbarProps = {
 export default function Searchbar({ onSearch }: SearchbarProps) {
     const [value, setValue] = useState("");
     const [suggestions, setSuggestions] = useState<string[]>([]);
+    const isSelected = useRef(false);
 
     useEffect(() => {
         const timeout = setTimeout(async () => {
+            if (isSelected.current) {
+                isSelected.current = false;
+                return;
+            }
+
             if(!value) {
                 setSuggestions([]);
                 return;
@@ -25,7 +31,7 @@ export default function Searchbar({ onSearch }: SearchbarProps) {
             console.log("Debounced value", value);
             const results = await fetchCitySuggestions(value);
             setSuggestions(results);
-        }, 500);
+        }, 300);
         return () => clearTimeout(timeout);
     }, [value]);
 
@@ -36,6 +42,7 @@ export default function Searchbar({ onSearch }: SearchbarProps) {
     }
 
     const handleSelect = (city: String) => {
+        isSelected.current = true;
         onSearch(String(city));
         setValue(String(city));
         setSuggestions([]);
@@ -58,10 +65,10 @@ export default function Searchbar({ onSearch }: SearchbarProps) {
                 />
                 {/* <button className="px-3 py-1.5 text-white bg-transparent hover:bg-gray-800 outline-1 outline-gray-500 rounded-full focus:-outline-offset-2 focus:outline-gray-600" onClick={handleSearch}>Search</button> */}
             </div>
-        <SuggestionList
-            suggestions={suggestions}
-            onSelect={handleSelect}
-        />
+            <SuggestionList
+                suggestions={suggestions}
+                onSelect={handleSelect}
+            />
         </div>
     );
 }
