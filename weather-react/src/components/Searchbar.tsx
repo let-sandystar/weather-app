@@ -44,7 +44,7 @@ export default function Searchbar({ onSearch }: SearchbarProps) {
     const handleSelect = (city: String) => {
         isSelected.current = true;
         onSearch(String(city));
-        setValue(String(city));
+        setValue("");
         setSuggestions([]);
         console.log("selected city", city);
     }
