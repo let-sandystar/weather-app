@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchWeather } from "../lib/api";
+import { getWeatherIcon } from "../utils/WeatherIconMap";
 
 type CurrentWeatherProps = {
     city: string;
@@ -7,7 +8,6 @@ type CurrentWeatherProps = {
 
 export default function CurrentWeatherCard({ city }: CurrentWeatherProps) {
     const [weather, setWeather] = useState<any>(null);
-
 
     useEffect(() => {
         if (!city) return;
@@ -20,9 +20,18 @@ export default function CurrentWeatherCard({ city }: CurrentWeatherProps) {
 
     if (!weather || !weather.main) return null;
 
+    const { main } = weather.weather[0];
+    const isNight = 
+        weather.dt < weather.sys.sunrise ||
+        weather.dt > weather.sys.sunset;
+    const iconPath = getWeatherIcon(main, isNight);
+
     return (
         <div className="relative overflow-hidden rounded-xl p-10 text-white shadow-2xl">
-            <h2 className="text-2xl font-bold">{weather.name}</h2>
+            <img src={iconPath} alt={main} />
+            <h2 className="text-2xl font-bold">
+                {weather.name}
+            </h2>
             <p className="text-xl font-semibold">
                 {Math.round(weather.main.temp)}&deg;C
             </p>
