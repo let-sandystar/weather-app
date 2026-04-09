@@ -5,7 +5,7 @@ const API_KEY = import.meta.env.VITE_GEODB_API_KEY;
 export const fetchCitySuggestions = async (query: string ) => {
     if (!query) return [];
 
-    const url = `${BASE_URL}?namePrefix=${query}&countryIds=SE&types=CITY&minPopulation=5000&limit=4`;
+    const url = `${BASE_URL}?namePrefix=${query}&types=CITY&minPopulation=5000&limit=4`;
     console.log("url", url);
 
     const options = {
