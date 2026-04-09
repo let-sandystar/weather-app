@@ -9,9 +9,6 @@ function App() {
   return (
     <>
       <Searchbar onSearch={setCity} />
-      <div className="mt-6 text-center text-white text-2xl">
-        Vald stad: {city}
-      </div>
       <div>
         <CurrentWeatherCard city = {city}></CurrentWeatherCard>
       </div>

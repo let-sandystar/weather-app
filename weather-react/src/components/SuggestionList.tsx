@@ -9,7 +9,7 @@ export default function SuggestionList( {suggestions, onSelect}: SuggestionProps
     return (
         <div>
              {suggestions.length > 0 && (
-                <ul className="absolute w-50 max-w-md bg-white text-black rounded-2xl shadow-lg z-10">
+                <ul className="absolute w-full max-w-md bg-white text-black rounded-2xl shadow-lg z-10">
                     {suggestions.map((city, index) => (
                         <li
                             key={index}
