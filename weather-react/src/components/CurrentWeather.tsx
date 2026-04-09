@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchWeather } from "../lib/api";
 import { getWeatherIcon } from "../utils/WeatherIconMap";
+import { fetchUV } from "../lib/uv";
 
 type CurrentWeatherProps = {
     city: string;
@@ -8,6 +9,7 @@ type CurrentWeatherProps = {
 
 export default function CurrentWeatherCard({ city }: CurrentWeatherProps) {
     const [weather, setWeather] = useState<any>(null);
+    const [uv, setUv] = useState(null);
 
     useEffect(() => {
         if (!city) return;
@@ -18,6 +20,17 @@ export default function CurrentWeatherCard({ city }: CurrentWeatherProps) {
         fetch();
     }, [city]);
 
+    useEffect(() => {
+        if (!weather) return;
+
+        const loadUV = async () => {
+            const { lat, lon } = weather.coord;
+            const uvValue = await fetchUV(lat, lon);
+            setUv(uvValue);
+        };
+        loadUV();
+    }, [weather]);
+
     if (!weather || !weather.main) return null;
 
     const { main, description } = weather.weather[0];
@@ -25,7 +38,6 @@ export default function CurrentWeatherCard({ city }: CurrentWeatherProps) {
         weather.dt < weather.sys.sunrise ||
         weather.dt > weather.sys.sunset;
     const iconPath = getWeatherIcon(main, isNight);
-    const windKmh = Math.round(weather.wind.speed * 3.6);
     const rain = weather.rain?.["1h"] ?? 0;
 
     return (
@@ -43,11 +55,18 @@ export default function CurrentWeatherCard({ city }: CurrentWeatherProps) {
             <p className="text-sm tracking-widest text-tertiary uppercase mt-1">
                {description}
             </p>
-            <div className="flex gap-6 mt-4">
+            <div className="flex gap-10 mt-4">
                 <div className="text-center">
                     <img className="h-10 w-10" src="/weather-icons/static/wind.svg" alt="wind" />
-                    <p className="font-semibold">{windKmh} km/h</p>
+                    <p className="font-semibold">{weather.wind.speed} m/s</p>
                 </div>
+
+                {uv !== null && (
+                    <div className="text-center">
+                        <img className="h-10 w-10" src="/weather-icons/static/uv-index.svg" alt="uv" />
+                        <p className="font-semibold">{uv}</p>
+                    </div>
+                )}
 
                 <div className="text-center">
                     <img className="h-10 w-10" src="/weather-icons/static/rain.svg" alt="rain" />
