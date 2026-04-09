@@ -20,24 +20,40 @@ export default function CurrentWeatherCard({ city }: CurrentWeatherProps) {
 
     if (!weather || !weather.main) return null;
 
-    const { main } = weather.weather[0];
+    const { main, description } = weather.weather[0];
     const isNight = 
         weather.dt < weather.sys.sunrise ||
         weather.dt > weather.sys.sunset;
     const iconPath = getWeatherIcon(main, isNight);
+    const windKmh = Math.round(weather.wind.speed * 3.6);
+    const rain = weather.rain?.["1h"] ?? 0;
 
     return (
         <div className="relative overflow-hidden rounded-xl p-10 text-white shadow-2xl">
-            <img src={iconPath} alt={main} />
-            <h2 className="text-2xl font-bold">
-                {weather.name}
+            <h2 className="text-2xl">
+                {weather.name}, {weather.sys.country}
             </h2>
-            <p className="text-xl font-semibold">
+            <img src={iconPath} alt={main} />
+            <p className="text-5xl font-bold text-on-surface mb-2">
                 {Math.round(weather.main.temp)}&deg;C
             </p>
-            <p className="text-lg">
+            <p className="text-on-surface-variant text-lg font-medium">
                Feels like: {Math.round(weather.main.feels_like)}&deg;C
             </p>
+            <p className="text-sm tracking-widest text-tertiary uppercase mt-1">
+               {description}
+            </p>
+            <div className="flex gap-6 mt-4">
+                <div className="text-center">
+                    <img className="h-10 w-10" src="/weather-icons/static/wind.svg" alt="wind" />
+                    <p className="font-semibold">{windKmh} km/h</p>
+                </div>
+
+                <div className="text-center">
+                    <img className="h-10 w-10" src="/weather-icons/static/rain.svg" alt="rain" />
+                    <p className="font-semibold">{rain} mm</p>
+                </div>
+            </div>
         </div>
     );
 };
