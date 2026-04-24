@@ -41,36 +41,36 @@ export default function CurrentWeatherCard({ city }: CurrentWeatherProps) {
     const rain = weather.rain?.["1h"] ?? 0;
 
     return (
-        <div className="relative overflow-hidden rounded-xl p-10 text-white shadow-2xl">
-            <h2 className="text-2xl">
+        <div className="glass-card relative overflow-hidden rounded-xl p-10 shadow-[0_0_40px_rgba(59,191,250,0.06)] text-center border border-outline-variant/10 mt-5">
+            <h2 className="text-2xl font-headline text-white mb-4">
                 {weather.name}, {weather.sys.country}
             </h2>
-            <img src={iconPath} alt={main} />
-            <p className="text-5xl font-bold text-on-surface mb-2">
+            <img src={iconPath} alt={main} className="mx-auto h-28 w-28 weather-glow" />
+            <p className="text-6xl font-bold text-white mt-4">
                 {Math.round(weather.main.temp)}&deg;C
             </p>
-            <p className="text-on-surface-variant text-lg font-medium">
+            <p className="text-white text-lg font-medium mt-1">
                Feels like: {Math.round(weather.main.feels_like)}&deg;C
             </p>
-            <p className="text-sm tracking-widest text-tertiary uppercase mt-1">
+            <p className="text-sm tracking-widest text-white uppercase mt-2">
                {description}
             </p>
-            <div className="flex gap-10 mt-4">
+            <div className="flex justify-center gap-10 mt-8">
                 <div className="text-center">
-                    <img className="h-10 w-10" src="/weather-icons/static/wind.svg" alt="wind" />
-                    <p className="font-semibold">{weather.wind.speed} m/s</p>
+                    <img className="h-10 w-10 mx-auto" src="/weather-icons/static/wind.svg" alt="wind" />
+                    <p className="font-semibold text-white mt-1">{weather.wind.speed} m/s</p>
                 </div>
 
                 {uv !== null && (
                     <div className="text-center">
-                        <img className="h-10 w-10" src="/weather-icons/static/uv-index.svg" alt="uv" />
-                        <p className="font-semibold">{uv}</p>
+                        <img className="h-10 w-10 mx-auto" src="/weather-icons/static/uv-index.svg" alt="uv" />
+                        <p className="font-semibold text-white mt-1">{uv}</p>
                     </div>
                 )}
 
                 <div className="text-center">
-                    <img className="h-10 w-10" src="/weather-icons/static/rain.svg" alt="rain" />
-                    <p className="font-semibold">{rain} mm</p>
+                    <img className="h-10 w-10 mx-auto" src="/weather-icons/static/rain.svg" alt="rain" />
+                    <p className="font-semibold text-white mt-1">{rain} mm</p>
                 </div>
             </div>
         </div>
