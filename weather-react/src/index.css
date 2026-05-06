@@ -11,3 +11,7 @@ body {
 .atmospheric-bg {
   background: radial-gradient(circle at top right, #141f38, #060e20);
 }
+
+img, svg {
+  -webkit-user-drag: none;
+}
