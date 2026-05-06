@@ -6,7 +6,7 @@ type SearchbarProps = {
     onSearch: (city: string) => void;
 };
 
-export default function Searchbar({ onSearch }: SearchbarProps) {
+const Searchbar: React.FC<SearchbarProps> = ({ onSearch }) => {
     const [value, setValue] = useState("");
     const [suggestions, setSuggestions] = useState<string[]>([]);
     const isSelected = useRef(false);
@@ -61,9 +61,9 @@ export default function Searchbar({ onSearch }: SearchbarProps) {
                 }}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 placeholder="Search for city"
+                autoFocus
                 className="w-full rounded-full bg-white/5 px-1 py-1 pl-5 md:px-2 md:py-2 md:pl-5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-grey-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-400"
                 />
-                {/* <button className="px-3 py-1.5 text-white bg-transparent hover:bg-gray-800 outline-1 outline-gray-500 rounded-full focus:-outline-offset-2 focus:outline-gray-600" onClick={handleSearch}>Search</button> */}
             </div>
             <SuggestionList
                 suggestions={suggestions}
@@ -72,3 +72,5 @@ export default function Searchbar({ onSearch }: SearchbarProps) {
         </div>
     );
 }
+
+export default Searchbar;
