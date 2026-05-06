@@ -55,22 +55,22 @@ export default function CurrentWeatherCard({ city }: CurrentWeatherProps) {
             <p className="text-sm tracking-widest text-white uppercase mt-2">
                {description}
             </p>
-            <div className="flex justify-center gap-10 mt-8">
+            <div className="flex justify-center gap-15 mt-10">
                 <div className="text-center">
                     <img className="h-10 w-10 mx-auto" src="/weather-icons/static/wind.svg" alt="wind" />
-                    <p className="font-semibold text-white mt-1">{weather.wind.speed} m/s</p>
+                    <p className="font-light text-white mt-1">{Math.round(weather.wind.speed)} m/s</p>
                 </div>
 
                 {uv !== null && (
                     <div className="text-center">
                         <img className="h-10 w-10 mx-auto" src="/weather-icons/static/uv-index.svg" alt="uv" />
-                        <p className="font-semibold text-white mt-1">{uv}</p>
+                        <p className="font-light text-white mt-1">{Math.round(uv)} UV</p>
                     </div>
                 )}
 
                 <div className="text-center">
                     <img className="h-10 w-10 mx-auto" src="/weather-icons/static/rain.svg" alt="rain" />
-                    <p className="font-semibold text-white mt-1">{rain} mm</p>
+                    <p className="font-light text-white mt-1">{Math.round(rain)} mm</p>
                 </div>
             </div>
         </div>
