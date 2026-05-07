@@ -7,7 +7,7 @@ type CurrentWeatherProps = {
     city: string;
 };
 
-export default function CurrentWeatherCard({ city }: CurrentWeatherProps) {
+export const CurrentWeatherCard: React.FC<CurrentWeatherProps> = ({ city }) => {
     const [weather, setWeather] = useState<any>(null);
     const [uv, setUv] = useState(null);
 
@@ -76,3 +76,5 @@ export default function CurrentWeatherCard({ city }: CurrentWeatherProps) {
         </div>
     );
 };
+
+export default CurrentWeatherCard;
