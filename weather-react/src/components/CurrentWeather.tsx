@@ -11,35 +11,33 @@ type CurrentWeatherProps = {
 export const CurrentWeatherCard: React.FC<CurrentWeatherProps> = ({ city }) => {
     const [weather, setWeather] = useState<CurrentWeather | null>(null);
     const [uv, setUv] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         if (!city) return;
-        const fetch = async () => {
+        const load = async () => {
+            setLoading(true);
+            setError("");
+
             try {
                 const data = await fetchWeather(city);
                 setWeather(data);
-            } catch (err) {
-                console.error(`Failed to fetch city, ${err}`);
-            }
-        };
-        fetch();
-    }, [city]);
 
-    useEffect(() => {
-        if (!weather) return;
-
-        const loadUV = async () => {
-            try {
-                const { lat, lon } = weather.coord;
+                const { lat, lon } = data.coord;
                 const uvValue = await fetchUV(lat, lon);
                 setUv(uvValue);
             } catch (err) {
-                console.error(`Failed to fetch uv value, ${err}`);
+                setError("City not found");
+                setWeather(null);
+                setUv(null);
+                console.error(`Failed to fetch city, ${err}`);
+            } finally {
+                setLoading(false);
             }
-            
         };
-        loadUV();
-    }, [weather]);
+        load();
+    }, [city]);
 
     if (!weather || !weather.main) return null;
 
