@@ -3,6 +3,7 @@ import { fetchWeather } from "../lib/api";
 import { getWeatherIcon } from "../utils/WeatherIconMap";
 import { fetchUV } from "../lib/uv";
 import type { CurrentWeather } from "../lib/api.types";
+import LoadingWeather from "./LoadingWeather";
 
 type CurrentWeatherProps = {
     city: string;
@@ -59,7 +60,7 @@ export const CurrentWeatherCard: React.FC<CurrentWeatherProps> = ({ city }) => {
                             </div>
                         </div>)}
 
-            {loading && (<p>Loading..</p>)}
+            {loading && (<LoadingWeather/>)}
 
             {!error && !loading && weather && (<div className="glass-card relative overflow-hidden rounded-xl p-10 shadow-[0_0_40px_rgba(59,191,250,0.06)] text-center border border-outline-variant/10 mt-5">
                 <h2 className="text-2xl font-headline text-white mb-4">
