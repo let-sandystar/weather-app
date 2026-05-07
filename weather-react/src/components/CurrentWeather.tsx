@@ -14,8 +14,12 @@ export const CurrentWeatherCard: React.FC<CurrentWeatherProps> = ({ city }) => {
     useEffect(() => {
         if (!city) return;
         const fetch = async () => {
-            const data = await fetchWeather(city);
-            setWeather(data);
+            try {
+                const data = await fetchWeather(city);
+                setWeather(data);
+            } catch (err) {
+                console.error(`Failed to fetch city, ${err}`);
+            }
         };
         fetch();
     }, [city]);
@@ -24,9 +28,14 @@ export const CurrentWeatherCard: React.FC<CurrentWeatherProps> = ({ city }) => {
         if (!weather) return;
 
         const loadUV = async () => {
-            const { lat, lon } = weather.coord;
-            const uvValue = await fetchUV(lat, lon);
-            setUv(uvValue);
+            try {
+                const { lat, lon } = weather.coord;
+                const uvValue = await fetchUV(lat, lon);
+                setUv(uvValue);
+            } catch (err) {
+                console.error(`Failed to fetch uv value, ${err}`);
+            }
+            
         };
         loadUV();
     }, [weather]);
