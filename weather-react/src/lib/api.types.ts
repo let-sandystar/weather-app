@@ -1,5 +1,7 @@
+import type { WeatherMain } from "../utils/WeatherIconMap";
+
 interface WeatherCondition {
-    main: string;
+    main: WeatherMain;
     description: string;
     id: number;
     icon: string;
@@ -18,6 +20,11 @@ export interface CurrentWeather {
         sunrise: number;
         sunset: number;
     }
+    coord: { 
+        lat: number; 
+        lon: number };
+    rain?: { 
+        "1h"?: number };
     weather: WeatherCondition[];
     wind: {
         deg: number;

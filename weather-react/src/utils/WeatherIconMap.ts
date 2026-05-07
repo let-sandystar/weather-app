@@ -1,4 +1,4 @@
-type WeatherMain =
+export type WeatherMain =
   | "Clear"
   | "Clouds"
   | "Rain"

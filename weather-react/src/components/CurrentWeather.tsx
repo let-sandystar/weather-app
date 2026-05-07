@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { fetchWeather } from "../lib/api";
 import { getWeatherIcon } from "../utils/WeatherIconMap";
 import { fetchUV } from "../lib/uv";
+import type { CurrentWeather } from "../lib/api.types";
 
 type CurrentWeatherProps = {
     city: string;
 };
 
 export const CurrentWeatherCard: React.FC<CurrentWeatherProps> = ({ city }) => {
-    const [weather, setWeather] = useState<any>(null);
+    const [weather, setWeather] = useState<CurrentWeather | null>(null);
     const [uv, setUv] = useState(null);
 
     useEffect(() => {
