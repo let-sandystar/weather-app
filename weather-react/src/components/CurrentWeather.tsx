@@ -60,14 +60,14 @@ export const CurrentWeatherCard: React.FC<CurrentWeatherProps> = ({ city }) => {
                             </div>
                         </div>)}
 
-            {loading && (<LoadingWeather/>)}
+            {loading && (<div className="flex justify-center items-center mt-10"><LoadingWeather/></div>)}
 
             {!error && !loading && weather && (<div className="glass-card relative overflow-hidden rounded-xl p-10 shadow-[0_0_40px_rgba(59,191,250,0.06)] text-center border border-outline-variant/10 mt-5">
                 <h2 className="text-2xl font-headline text-white mb-4">
                     {weather.name}, {weather.sys.country}
                 </h2>
                 <img src={iconPath} alt={main} className="mx-auto h-28 w-28 weather-glow" />
-                <p className="text-6xl font-bold text-white mt-4">
+                <p className="text-5xl font-bold text-white mt-4">
                     {Math.round(weather.main.temp)}&deg;C
                 </p>
                 <p className="text-white text-lg font-medium mt-1">
