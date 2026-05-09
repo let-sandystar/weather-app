@@ -88,6 +88,7 @@ export const CurrentWeatherCard: React.FC<CurrentWeatherProps> = ({ city }) => {
                             <p className="font-light text-white mt-1">{Math.round(uv)} UV</p>
                         </div>
                     )}
+                    
                     {rain > 0 && (<div className="text-center">
                         <img className="h-10 w-10 mx-auto" src="/weather-icons/static/rain.svg" alt="rain" />
                         <p className="font-light text-white mt-1">{Math.round(rain)} mm</p>
