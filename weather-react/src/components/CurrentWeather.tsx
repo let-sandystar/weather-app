@@ -56,7 +56,7 @@ export const CurrentWeatherCard: React.FC<CurrentWeatherProps> = ({ city }) => {
                                 Error
                             </div>
                             <div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
-                                <p>Can't find city, try again</p>
+                                <p>Can't find "{city}", try again</p>
                             </div>
                         </div>)}
 
