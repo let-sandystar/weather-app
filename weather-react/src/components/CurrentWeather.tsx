@@ -4,6 +4,8 @@ import { getWeatherIcon } from "../utils/WeatherIconMap";
 import { fetchUV } from "../lib/uv";
 import type { CurrentWeather } from "../lib/api.types";
 import LoadingWeather from "./LoadingWeather";
+import ExpandButton from "./ExpandButton";
+import ExpandedSection from "./ExpandedSection";
 
 type CurrentWeatherProps = {
     city: string;
@@ -14,6 +16,7 @@ export const CurrentWeatherCard: React.FC<CurrentWeatherProps> = ({ city }) => {
     const [uv, setUv] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [expanded, setExpanded] = useState(false);
 
     useEffect(() => {
         if (!city) return;
@@ -94,6 +97,18 @@ export const CurrentWeatherCard: React.FC<CurrentWeatherProps> = ({ city }) => {
                         <p className="font-light text-white mt-1">{Math.round(rain)} mm</p>
                     </div>)}
                 </div>
+
+                <div className="flex justify-center mt-4">
+                    <ExpandButton
+                    expanded={expanded}
+                    onToggle={() => setExpanded(prev => !prev)}
+                    />
+                </div>
+
+                {expanded && (
+                <ExpandedSection/>
+                )};
+
             </div>)}
             
         </>
