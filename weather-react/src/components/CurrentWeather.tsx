@@ -47,70 +47,96 @@ export const CurrentWeatherCard: React.FC<CurrentWeatherProps> = ({ city }) => {
     const main = weatherItem?.main!;
     const description = weatherItem?.description ?? "";
     const isNight = weather
-    ? weather.dt < weather.sys.sunrise || weather.dt > weather.sys.sunset
-    : false;
+        ? weather.dt < weather.sys.sunrise || weather.dt > weather.sys.sunset
+        : false;
     const iconPath = getWeatherIcon(main, isNight);
     const rain = weather?.rain?.["1h"] ?? 0;
 
     return (
         <>
-            {error && (<div role="alert">
-                            <div className="bg-red-500 text-white font-bold rounded-t px-4 py-2 mt-8">
-                                Error
-                            </div>
-                            <div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
-                                <p>Can't find "{city}", try again</p>
-                            </div>
-                        </div>)}
-
-            {loading && (<div className="flex justify-center items-center mt-10"><LoadingWeather/></div>)}
-
-            {!error && !loading && weather && (<div className="glass-card relative overflow-hidden rounded-xl p-10 shadow-[0_0_40px_rgba(59,191,250,0.06)] text-center border border-outline-variant/10 mt-5">
-                <h2 className="text-2xl font-headline text-white mb-2">
-                    {weather.name}, {weather.sys.country}
-                </h2>
-                <img src={iconPath} alt={main} className="mx-auto h-40 w-40 weather-glow" />
-                <p className="text-5xl font-bold text-white">
-                    {Math.round(weather.main.temp)}&deg;C
-                </p>
-                <p className="text-white text-lg font-medium mt-1">
-                Feels like: {Math.round(weather.main.feels_like)}&deg;C
-                </p>
-                <p className="text-sm tracking-widest text-white uppercase mt-2">
-                {description}
-                </p>
-                <div className="flex justify-center gap-15 mt-10">
-                    <div className="text-center">
-                        <img className="h-10 w-10 mx-auto" src="/weather-icons/static/wind.svg" alt="wind" />
-                        <p className="font-light text-white mt-1">{Math.round(weather.wind.speed)} m/s</p>
+            {error && (
+                <div role="alert">
+                    <div className="mt-8 rounded-t bg-red-500 px-4 py-2 font-bold text-white">
+                        Error
                     </div>
-
-                    {uv !== null && (
-                        <div className="text-center">
-                            <img className="h-10 w-10 mx-auto" src="/weather-icons/static/uv-index.svg" alt="uv" />
-                            <p className="font-light text-white mt-1">{Math.round(uv)} UV</p>
-                        </div>
-                    )}
-                    
-                    {rain > 0 && (<div className="text-center">
-                        <img className="h-10 w-10 mx-auto" src="/weather-icons/static/rain.svg" alt="rain" />
-                        <p className="font-light text-white mt-1">{Math.round(rain)} mm</p>
-                    </div>)}
+                    <div className="rounded-b border border-t-0 border-red-400 bg-red-100 px-4 py-3 text-red-700">
+                        <p>Can't find "{city}", try again</p>
+                    </div>
                 </div>
+            )}
 
-                <div className="flex justify-center mt-4">
-                    <ExpandButton
-                    expanded={expanded}
-                    onToggle={() => setExpanded(prev => !prev)}
+            {loading && (
+                <div className="mt-10 flex items-center justify-center">
+                    <LoadingWeather />
+                </div>
+            )}
+
+            {!error && !loading && weather && (
+                <div className="glass-card border-outline-variant/10 relative mt-5 overflow-hidden rounded-xl border p-10 text-center shadow-[0_0_40px_rgba(59,191,250,0.06)]">
+                    <h2 className="font-headline mb-2 text-2xl text-white">
+                        {weather.name}, {weather.sys.country}
+                    </h2>
+                    <img
+                        src={iconPath}
+                        alt={main}
+                        className="weather-glow mx-auto h-40 w-40"
                     />
+                    <p className="text-5xl font-bold text-white">
+                        {Math.round(weather.main.temp)}&deg;C
+                    </p>
+                    <p className="mt-1 text-lg font-medium text-white">
+                        Feels like: {Math.round(weather.main.feels_like)}&deg;C
+                    </p>
+                    <p className="mt-2 text-sm tracking-widest text-white uppercase">
+                        {description}
+                    </p>
+                    <div className="mt-10 flex justify-center gap-15">
+                        <div className="text-center">
+                            <img
+                                className="mx-auto h-10 w-10"
+                                src="/weather-icons/static/wind.svg"
+                                alt="wind"
+                            />
+                            <p className="mt-1 font-light text-white">
+                                {Math.round(weather.wind.speed)} m/s
+                            </p>
+                        </div>
+
+                        {uv !== null && (
+                            <div className="text-center">
+                                <img
+                                    className="mx-auto h-10 w-10"
+                                    src="/weather-icons/static/uv-index.svg"
+                                    alt="uv"
+                                />
+                                <p className="mt-1 font-light text-white">
+                                    {Math.round(uv)} UV
+                                </p>
+                            </div>
+                        )}
+
+                        {rain > 0 && (
+                            <div className="text-center">
+                                <img
+                                    className="mx-auto h-10 w-10"
+                                    src="/weather-icons/static/rain.svg"
+                                    alt="rain"
+                                />
+                                <p className="mt-1 font-light text-white">
+                                    {Math.round(rain)} mm
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                    <div className="mt-4 flex justify-center">
+                        <ExpandButton
+                            expanded={expanded}
+                            onToggle={() => setExpanded(prev => !prev)}
+                        />
+                    </div>
+                    {expanded && <ExpandedSection />};
                 </div>
-
-                {expanded && (
-                <ExpandedSection/>
-                )};
-
-            </div>)}
-            
+            )}
         </>
     );
 };

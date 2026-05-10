@@ -6,4 +6,4 @@ export const fetchUV = async (lat: number, lon: number) => {
     const res = await fetch(url);
     const data = await res.json();
     return data.current?.uv ?? null;
-}
+};

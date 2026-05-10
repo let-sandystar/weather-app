@@ -1,17 +1,16 @@
 export type WeatherMain =
-  | "Clear"
-  | "Clouds"
-  | "Rain"
-  | "Drizzle"
-  | "Thunderstorm"
-  | "Snow"
-  | "Mist"
-  | "Fog"
-  | "Haze";
+    | "Clear"
+    | "Clouds"
+    | "Rain"
+    | "Drizzle"
+    | "Thunderstorm"
+    | "Snow"
+    | "Mist"
+    | "Fog"
+    | "Haze";
 
 export function getWeatherIcon(main: WeatherMain, isNight: boolean): string {
-
-    const map: Record<WeatherMain, { day: string; night: string}> = {
+    const map: Record<WeatherMain, { day: string; night: string }> = {
         Clear: {
             day: "weather-icons/clear-day.svg",
             night: "/weather-icons/clear-night.svg",

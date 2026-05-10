@@ -13,24 +13,26 @@ export interface CurrentWeather {
         temp: number;
         feels_like: number;
         humidity: number;
-    }
+    };
     name: string;
     sys: {
         country: string;
         sunrise: number;
         sunset: number;
-    }
-    coord: { 
-        lat: number; 
-        lon: number };
-    rain?: { 
-        "1h"?: number };
+    };
+    coord: {
+        lat: number;
+        lon: number;
+    };
+    rain?: {
+        "1h"?: number;
+    };
     weather: WeatherCondition[];
     wind: {
         deg: number;
         speed: number;
-    }
+    };
     clouds: {
         all: number;
-    }
+    };
 }

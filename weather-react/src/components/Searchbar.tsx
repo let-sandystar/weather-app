@@ -18,7 +18,7 @@ const Searchbar: React.FC<SearchbarProps> = ({ onSearch }) => {
                 return;
             }
 
-            if(!value) {
+            if (!value) {
                 setSuggestions([]);
                 return;
             }
@@ -27,7 +27,7 @@ const Searchbar: React.FC<SearchbarProps> = ({ onSearch }) => {
                 setSuggestions([]);
                 return;
             }
-            
+
             console.log("Debounced value", value);
             const results = await fetchCitySuggestions(value);
             setSuggestions(results);
@@ -39,7 +39,7 @@ const Searchbar: React.FC<SearchbarProps> = ({ onSearch }) => {
         if (!value.trim()) return;
         onSearch(value);
         setValue("");
-    }
+    };
 
     const handleSelect = (city: String) => {
         isSelected.current = true;
@@ -47,30 +47,28 @@ const Searchbar: React.FC<SearchbarProps> = ({ onSearch }) => {
         setValue("");
         setSuggestions([]);
         console.log("selected city", city);
-    }
+    };
 
     return (
-        <div className="relative flex flex-col w-full max-w-md">
+        <div className="relative flex w-full max-w-md flex-col">
             <div className="flex items-center gap-0.5">
-                <input type="text"
-                name="search"
-                value={value}
-                onChange={(e) => {
-                    setValue(e.target.value);
-                    console.log("Input value", e.target.value);
-                }}
-                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                placeholder="Search for city"
-                autoFocus
-                className="w-full rounded-full bg-white/5 px-1 py-1 pl-5 md:px-2 md:py-2 md:pl-5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-grey-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-400"
+                <input
+                    type="text"
+                    name="search"
+                    value={value}
+                    onChange={e => {
+                        setValue(e.target.value);
+                        console.log("Input value", e.target.value);
+                    }}
+                    onKeyDown={e => e.key === "Enter" && handleSearch()}
+                    placeholder="Search for city"
+                    autoFocus
+                    className="placeholder:text-grey-400 w-full rounded-full bg-white/5 px-1 py-1 pl-5 text-base text-white outline-1 -outline-offset-1 outline-white/10 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-400 md:px-2 md:py-2 md:pl-5"
                 />
             </div>
-            <SuggestionList
-                suggestions={suggestions}
-                onSelect={handleSelect}
-            />
+            <SuggestionList suggestions={suggestions} onSelect={handleSelect} />
         </div>
     );
-}
+};
 
 export default Searchbar;
